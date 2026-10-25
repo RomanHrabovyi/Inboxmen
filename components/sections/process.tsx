@@ -1,0 +1,11 @@
+"use client";
+
+import { ArrowRight, ClipboardCheck, Layers3, TrendingUp } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import { Reveal, SectionEyebrow } from "@/components/motion";
+const steps = [
+  { title: "Audit", copy: "Look at the account, the customer journey and the revenue signals. Leave with a practical action plan.", icon: ClipboardCheck },
+  { title: "Build", copy: "Prioritize the flows, campaigns and foundations that fit your brand and current stage.", icon: Layers3 },
+  { title: "Scale", copy: "Measure what changes, test the next improvement and grow what proves useful.", icon: TrendingUp },
+];
+export function Process() { const reduced = useReducedMotion(); return <section className="section-pad container-shell" id="process"><Reveal><SectionEyebrow>How it works</SectionEyebrow><div className="flex flex-wrap items-end justify-between gap-6"><h2 className="section-title max-w-[660px]">A clear path from inbox to impact.</h2><p className="body-copy max-w-[350px]">Small steps, sound foundations, and a plan you can understand at every point.</p></div></Reveal><div className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-8"><motion.div data-motion="process-line" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: reduced ? 0 : 1.1, ease: [0.22, 1, 0.36, 1] }} className="absolute left-[12%] right-[12%] top-8 hidden h-px origin-left bg-black/20 md:block" />{steps.map(({ title, copy, icon: Icon }, i) => <Reveal key={title} delay={i * .16} className="relative"><motion.div data-motion="process-icon" initial={{ scale: .82 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 220, damping: 18, delay: reduced ? 0 : i * .14 }} className="relative z-10 grid h-16 w-16 place-items-center rounded-full bg-acid"><Icon size={24} /></motion.div><p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-muted">Step 0{i + 1}</p><h3 className="mt-2 text-3xl font-semibold tracking-[-.05em]">{title}</h3><p className="body-copy mt-3 max-w-[340px]">{copy}</p>{i < 2 && <ArrowRight className="absolute right-0 top-6 hidden text-muted md:block" />}</Reveal>)}</div></section>; }
